@@ -14,7 +14,14 @@ Apply this purpose across languages, frameworks, and application types. Do not a
 
 ## Development status
 
-This is the initial skill definition. The detailed investigation workflow, output templates, and behavioral validation are still under development. Do not present this package as a validated end-to-end specification workflow or claim tested Kiro compatibility.
+This package defines an investigation and specification workflow with an adaptable document contract. Behavioral validation and live Kiro compatibility testing are still pending. Do not claim that either has been completed.
+
+## Workflow
+
+1. Read [the investigation workflow](references/investigation.md) when starting or revising an analysis. Establish the target project, combine the available requirement fragments, and investigate the relevant implementation before proposing a design.
+2. Ask about missing decisions and conflicts. Keep the user's stated intent separate from technical findings. Continue work that does not depend on an unanswered question.
+3. Read [the document contract](references/document-contract.md) before preparing a specification package. Choose its size and filenames for the actual work item, and establish the output location before writing.
+4. Review the package against the contract's completion checks. Present its scope, evidence, unresolved issues, and actual validation results. Stop at the specification handoff; do not execute the implementation tasks.
 
 ## Operating boundaries
 

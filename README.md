@@ -6,9 +6,9 @@ MasterArch is an Agent Skill intended primarily for Kiro. It is designed for sof
 
 ## Status
 
-The repository currently contains the initial skill definition and operating boundaries. The detailed analysis workflow, reusable output templates, and behavioral validation are not implemented yet. Kiro compatibility has not been tested. The first planned release is v0.1.0.
+The repository contains the skill instructions, a repository investigation workflow, and an adaptable specification document contract. These are agent instructions, not a standalone analysis program. Behavioral validation and live Kiro compatibility testing have not been completed. The first planned release is v0.1.0.
 
-The intended workflow is to combine requirements shared across messages, investigate the relevant existing implementation, clarify missing decisions, and prepare an analysis and ordered plan that another coding agent can use. MasterArch's responsibility is specification and handoff, not feature implementation.
+The workflow combines requirements shared across messages, investigates the relevant existing implementation, clarifies missing decisions, and prepares an analysis and ordered plan that another coding agent can use. MasterArch's responsibility is specification and handoff, not feature implementation.
 
 ## Try the initial definition in Kiro
 
@@ -34,6 +34,8 @@ Local-first describes the skill's workflow. The host agent's model processing an
 ## Layout
 
 - `masterarch/SKILL.md`: skill metadata, purpose, and initial operating boundaries.
+- `masterarch/references/investigation.md`: discovery, evidence, requirement interpretation, classification, and impact analysis.
+- `masterarch/references/document-contract.md`: document sizing, traceability, task planning, verification, and agent handoff.
 - `LICENSE`: MIT license.
 
 The package follows the [Agent Skills format](https://agentskills.io/specification). Additional references, templates, or scripts will be introduced only when the workflow needs them.
