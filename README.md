@@ -6,7 +6,7 @@ MasterArch is an Agent Skill intended primarily for Kiro. It is designed for sof
 
 ## Status
 
-The repository contains the skill instructions, a repository investigation workflow, and an adaptable specification document contract. These are agent instructions, not a standalone analysis program. Behavioral validation and live Kiro compatibility testing have not been completed. The first planned release is v0.1.0.
+The repository contains the skill instructions, a repository investigation workflow, and an adaptable specification document contract. These are agent instructions, not a standalone analysis program. The workflow has been exercised through blind behavioral runs against a test fixture (see [`tests/results.md`](tests/results.md)); those are single runs on a server-selected model, not a guarantee across all models or inputs, and they do not establish native Kiro Spec-session integration. The first planned release is v0.1.0.
 
 The workflow combines requirements shared across messages, investigates the relevant existing implementation, clarifies missing decisions, and prepares an analysis and ordered plan that another coding agent can use. MasterArch's responsibility is specification and handoff, not feature implementation.
 
@@ -20,6 +20,10 @@ Copy the `masterarch/` folder into either:
 Then invoke `/masterarch` with the project location and your change request. You can provide the request in several messages. Agree on an output location before asking the agent to write documents.
 
 These locations and invocation follow the [Kiro Skills documentation](https://kiro.dev/docs/skills/); they have not been verified with this skill in a running Kiro session.
+
+## What it produces
+
+See [`examples/`](examples/) for a sample specification package. The [case-insensitive-search example](examples/case-insensitive-search/bugfix.md) shows a single-document bug package: the current behavior verified against source, an evidence record, a two-part request consolidated with its correction preserved, ordered tasks, a requirement-to-task-to-verification table, and an agent handoff. Larger work items produce a multi-document package (`requirements.md`, `design.md`, `tasks.md`).
 
 ## Boundaries
 
@@ -36,6 +40,8 @@ Local-first describes the skill's workflow. The host agent's model processing an
 - `masterarch/SKILL.md`: skill metadata, purpose, and initial operating boundaries.
 - `masterarch/references/investigation.md`: discovery, evidence, requirement interpretation, classification, and impact analysis.
 - `masterarch/references/document-contract.md`: document sizing, traceability, task planning, verification, and agent handoff.
+- `examples/`: a sample specification package produced by the skill.
+- `tests/`: the validation fixture, behavioral scenarios, and an isolation harness.
 - `LICENSE`: MIT license.
 
 The package follows the [Agent Skills format](https://agentskills.io/specification). Additional references, templates, or scripts will be introduced only when the workflow needs them.
