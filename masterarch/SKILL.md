@@ -2,6 +2,7 @@
 name: masterarch
 description: Analyze an existing software project and turn informal requirements shared across messages into a technical specification and ordered implementation plan for a coding agent. Use when a user needs a change investigated and specified before implementation.
 license: MIT
+compatibility: Primarily AWS Kiro; the Markdown output is portable to other agents. Reads the accessible local project and writes documents only to an agreed location. Requires no database, backend service, or network access beyond the host agent.
 ---
 
 # MasterArch
@@ -14,7 +15,7 @@ Apply this purpose across languages, frameworks, and application types. Do not a
 
 ## Development status
 
-This package defines an investigation and specification workflow with an adaptable document contract. Behavioral validation and live Kiro compatibility testing are still pending. Do not claim that either has been completed.
+This package defines an investigation and specification workflow with an adaptable document contract. The workflow has been exercised through blind behavioral runs against a test fixture; those are single runs on a server-selected model and do not establish native Kiro Spec-session integration. Report actual results; do not overstate coverage.
 
 ## Workflow
 
