@@ -16,9 +16,9 @@ Confirmed by execution during analysis, not asserted:
 - Fixture JS baseline: `node --test checks.test.mjs` → 3 pass / 0 fail.
 - Fixture API build: `dotnet build api/Workbench.csproj` → 0 warnings / 0 errors.
 - `prepare-run.mjs` builds an isolated workspace (12 input files: fixture plus the installed skill, excluding `bin`/`obj`), writes SHA-256 baselines, and refuses to overwrite an existing run (EEXIST).
-- `check-run.mjs` detection confirmed on all three guard conditions: valid output listed with empty failures (exit 0); output outside `.kiro/specs/<id>/` reported as "Unexpected output" (exit 1); a mutated input file reported as "Changed or missing input" (exit 1).
+- `check-run.mjs` detection confirmed on all guard conditions: valid output listed with empty failures (exit 0); output outside `.kiro/specs/<id>/` reported as "Unexpected output" (exit 1); a mutated input file reported as "Changed or missing input" (exit 1); and, by default, a run that produced no document under `.kiro/specs/<id>/` reported as "No specification document produced" (exit 1), with `--allow-empty` available to check isolation before a run.
 
-Toolchain: Node v24 (nvm), .NET SDK 10.0.403. Both are available only via a login shell on the validation host; non-interactive shells must wrap commands with `zsh -lc`.
+Toolchain: the recorded behavioral runs used Node v24 (nvm) and .NET SDK 10.0.403 on the original validation host, when the fixture targeted `net10.0`. The fixture now targets `net8.0` (LTS) to match the documented ".NET SDK 8.0+" requirement and to build on CI's `8.0.x` SDK; its API build was re-confirmed (`dotnet build api/Workbench.csproj` → 0 warnings / 0 errors) and the JavaScript baseline re-run (`node --test checks.test.mjs` → 3 pass / 0 fail) after the retarget. The framework change does not affect the specification outputs recorded below, which concern source evidence and document structure, not the target framework.
 
 ## Evaluation axes
 

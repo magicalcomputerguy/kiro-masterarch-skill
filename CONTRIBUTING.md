@@ -30,12 +30,17 @@ dotnet build api/Workbench.csproj
 Isolation harness — prepares a throwaway copy of the fixture with the skill installed, then checks that a run changed no input file and wrote only to the approved spec location:
 
 ```
-node tests/prepare-run.mjs S1   # creates .validation/S1/workspace
+node tests/prepare-run.mjs S1                 # creates .validation/S1/workspace
+node tests/check-run.mjs S1 --allow-empty     # before a run: isolation and output location only
 # (run the skill against that workspace in a separate session)
-node tests/check-run.mjs S1     # reports documents produced and any violations
+node tests/check-run.mjs S1                   # after a run: also require at least one spec document
 ```
 
-`.validation/` is git-ignored. See `tests/scenarios.md` for the behavioral scenarios and `tests/results.md` for recorded results.
+By default `check-run.mjs` fails when no Markdown document was written under `.kiro/specs/<id>/`, so an empty run cannot pass silently. Use `--allow-empty` to check isolation before the skill has run. `.validation/` is git-ignored. See `tests/scenarios.md` for the behavioral scenarios and `tests/results.md` for recorded results.
+
+## Continuous integration
+
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs the fixture JavaScript baseline, the fixture API build, and the isolation harness guards on every push and pull request to `main`. CI confirms the harness and fixture toolchain, not the semantic quality of a generated specification — that still requires the blind behavioral review described in `tests/scenarios.md`.
 
 ## Documentation style
 

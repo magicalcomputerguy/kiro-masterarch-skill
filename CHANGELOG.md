@@ -6,6 +6,21 @@ aims to follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-28
+
+### Added
+
+- `.github/workflows/ci.yml`: continuous integration that runs the fixture JavaScript baseline, the fixture API build, and the isolation harness guards on every push and pull request to `main`.
+
+### Changed
+
+- `tests/check-run.mjs` now fails by default when a run produced no specification document under `.kiro/specs/<id>/`, so an empty run can no longer pass the isolation check silently. A new `--allow-empty` flag preserves the earlier behavior for checking isolation before the skill has run.
+- The validation fixture's API (`tests/fixtures/workbench/api/Workbench.csproj`) now targets `net8.0` (LTS) instead of `net10.0`, matching the documented ".NET SDK 8.0+" requirement and the version used in CI.
+
+### Fixed
+
+- README and `tests/results.md` now distinguish slash-command invocation inside a Kiro session (recorded) from native Kiro Spec-session integration (not established), rather than stating the limitation only in passing.
+
 ## [0.1.0] - 2026-10-27
 
 Initial release.
@@ -25,5 +40,6 @@ Initial release.
 - MasterArch is a set of agent instructions, not a standalone program.
 - The recorded behavioral runs are single runs on a server-selected model and do not guarantee behavior across all models or inputs. Native Kiro Spec-session integration has not been established.
 
-[Unreleased]: https://github.com/magicalcomputerguy/kiro-masterarch-skill/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/magicalcomputerguy/kiro-masterarch-skill/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/magicalcomputerguy/kiro-masterarch-skill/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/magicalcomputerguy/kiro-masterarch-skill/releases/tag/v0.1.0

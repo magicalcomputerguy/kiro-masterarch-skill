@@ -6,7 +6,9 @@ MasterArch is an Agent Skill intended primarily for Kiro. It is designed for sof
 
 ## Status
 
-The repository contains the skill instructions, a repository investigation workflow, and an adaptable specification document contract. These are agent instructions, not a standalone analysis program. The workflow has been exercised through blind behavioral runs against a test fixture (see [`tests/results.md`](tests/results.md)); those are single runs on a server-selected model, not a guarantee across all models or inputs, and they do not establish native Kiro Spec-session integration. This is the first release (v0.1.0); see [`CHANGELOG.md`](CHANGELOG.md).
+The repository contains the skill instructions, a repository investigation workflow, and an adaptable specification document contract. These are agent instructions, not a standalone analysis program. The workflow has been exercised through blind behavioral runs against a test fixture (see [`tests/results.md`](tests/results.md)); those are single runs on a server-selected model, not a guarantee across all models or inputs.
+
+Two things were verified separately and should not be conflated: the skill was invoked as a slash command inside a Kiro session and produced the recorded documents, and it has *not* been wired into a native Kiro Spec session (the Spec requirements → design → tasks workflow). The recorded runs establish the former, not the latter. This is the first release line (v0.1.x); see [`CHANGELOG.md`](CHANGELOG.md).
 
 The workflow combines requirements shared across messages, investigates the relevant existing implementation, clarifies missing decisions, and prepares an analysis and ordered plan that another coding agent can use. MasterArch's responsibility is specification and handoff, not feature implementation.
 
@@ -34,9 +36,12 @@ The skill instructions are not executed, but the repository ships a validation f
 cd tests/fixtures/workbench && node --test checks.test.mjs && dotnet build api/Workbench.csproj
 
 # isolation harness (from the repository root)
-node tests/prepare-run.mjs S1   # prepare an isolated run
-node tests/check-run.mjs S1     # verify inputs unchanged and output location
+node tests/prepare-run.mjs S1                 # prepare an isolated run
+node tests/check-run.mjs S1 --allow-empty     # before a run: inputs unchanged, output location only
+node tests/check-run.mjs S1                   # after a run: also require a specification document
 ```
+
+These checks run on every push and pull request via [GitHub Actions](.github/workflows/ci.yml).
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for details and [`tests/scenarios.md`](tests/scenarios.md) for the behavioral scenarios.
 
@@ -57,6 +62,7 @@ Local-first describes the skill's workflow. The host agent's model processing an
 - `masterarch/references/document-contract.md`: document sizing, traceability, task planning, verification, and agent handoff.
 - `examples/`: a sample specification package produced by the skill.
 - `tests/`: the validation fixture, behavioral scenarios, and an isolation harness.
+- `.github/workflows/ci.yml`: continuous integration for the fixture and harness checks.
 - `CONTRIBUTING.md`: how to run the checks and contribute.
 - `CHANGELOG.md`: release history.
 - `LICENSE`: MIT license.
