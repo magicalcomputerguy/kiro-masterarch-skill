@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Fixture JavaScript baseline
+        working-directory: tests/fixtures/workbench
+        run: node --test checks.test.mjs
+
+      - name: Fixture API build
+        working-directory: tests/fixtures/workbench
+        run: dotnet build api/Workbench.csproj
+
+      - name: Isolation harness guards
+        run: |
+          node tests/prepare-run.mjs S1
+          node tests/check-run.mjs S1 --allow-empty
